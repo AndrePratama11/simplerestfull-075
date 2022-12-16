@@ -26,11 +26,17 @@ public class Controller {
       Product honey = new Product();
       honey.setId("1");
       honey.setName("Honey");
+      honey.setNumber(3);
+      honey.setPrice(90000);
+      honey.setTotal();
       productRepo.put(honey.getId(), honey);
       
       Product almond = new Product();
       almond.setId("2");
       almond.setName("Almond");
+      almond.setNumber(2);
+      almond.setPrice(100000);
+      almond.setTotal();
       productRepo.put(almond.getId(), almond);
    }
    
@@ -62,11 +68,12 @@ public class Controller {
           return new ResponseEntity<>("Id product is already exists.", HttpStatus.OK);
       }
       //fungsi ketika id kosong
-      else if(!productRepo.containsKey(product.getId())){
+      else if(productRepo.containsKey(product.getId())){
           return new ResponseEntity<>("please fill the Id Product",HttpStatus.OK);
       }
       //fungsi menambahkan product
       else{
+          product.setTotal();
       productRepo.put(product.getId(), product);
       return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
    }
